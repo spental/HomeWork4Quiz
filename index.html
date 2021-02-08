@@ -1,55 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Heck of a Honeybee Quiz</title>
+    <link href="/assets/style.css" rel="stylesheet" />
+  </head>
 
-<head>
-<!-- Standard Meta info -->
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Tab Title  -->
-<title>Honey Bee Quiz</title>
-<!-- Style Link  -->
-<link href="/assets/style.css" rel="stylesheet"/>
-<!-- bootstrap link -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
-
-</head>
-
-<body>  
-
-    <nav class="navbar" style="text-align: center;">
-        <section class="timerCount">Remaining Time:<br>
-             60 Seconds</section>
-        <section class="scoreContent">
-            <section class="scoreList">
-                <button class="highScoreBtn">Highscores</button>
+  <body>
+    <main id="everything">
+      <div class="frindgeColor">
+        <nav id="navbarTimer">
+          <h1>
+            <section class="countdown">Time Remaining : 60 seconds.</section>
+          </h1>
+        </nav>
+        
+        <section class="container" id="main">
+          <section id="question-container" class="hide">
+            <section id="question">
+              <section id="currentQuestion"></section>
+              <section class="answerBtns" id="btn-grid"></section>
             </section>
+          </section>
+          <section class="startBtn" style="text-align: center;" id="question-container">
+              <h2>
+                Honeybee Quiz !
+              <hr />
+            </h2>
+            Click the [ Click Here to Start Quiz ] button below to begin the quiz. Once button is pressed a countdown timer will start. For every incorrect answer time will be deducted from the clock. Quiz will end when questions have all been answered or when the timer reaches 0 seconds remaining. 
+          </section>
         </section>
-    </nav>
-    <main class="container" id="mainDiv">
-
-        <!-- heading and quiz info div -->
-        <div class="headingAndQuizInfo" style="text-align: center;">
-                <h1>Honey Bee Quiz</h1>
+        <div id="buttonStart" style="align-content: center; align-items: center; text-align: center;">
+          <button id="start-btn" class="start-btn btn">Start</button>
         </div>
-
-        <!-- question container -->
-        <div class="questionsDiv" style="text-align: center;">
-            <div class="questionContainer">
-                
-            </div>
-            <div>
-                <section class="startQuizDiv">
-                    <button class="startQuizBtn">Click Here to<br>
-                        Start Quiz</button>
-                </section>
-            </div>
-        </div>
-
-        <!-- footer ? -->
-
-
+  
+        
+        <footer>
+          <section class="scoreList">
+            <button class="highScoreBtn">Highscores</button>
+        </footer>
+      </div>
     </main>
     <script src="/assets/script.js"></script>
-</body>
+  </body>
 </html>

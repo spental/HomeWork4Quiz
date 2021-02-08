@@ -1,97 +1,70 @@
-.navbar {  
-border-color:black;
- border-radius: 0% 0% 1% 0%;
- border-style: dashed;
- border-width: 2px;
- background-image: url('/pics/honey.jpg');
- opacity: .7;
- background-repeat: no-repeat;
- background-attachment: fixed;
- background-size: cover;
-}
 body {
-    margin: 2% 2% 100% 2%;
-    border-style: dashed;
-    border-color: rgb(228, 214, 23);
-    border-width: 3px;
-    background-color: black;
-}
-.timerCount {
-  /* color: yellow;
   background-color: black;
+}
+#everything {
+  margin: 2%;
+  border-width: 2px;
   border-color: yellow;
-  border-width: 3px;
-  border-radius: 45%;
-  margin-left: 25%;
-  margin-right: 25%; */
+  border-style: solid;
+
+}
+#start-btn  {
   border:solid;
   border-color: yellow;
   padding: 3% 2%;
   text-align: center;
-  text-decoration: none;
   display: inline-block;
   font-size: 11px;
   background-color: black;
   color: yellow;
   border-radius: 45%;
 }
-
-#mainDiv{
-    background-image: url('/pics/bee1.jpeg');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    opacity: .7;
-}
-h1 {
-    margin: 0% 0% 0% 0%;
-}
-
 .highScoreBtn {
-    background-color: #4CAF50; /* Green */
-    border:solid;
-    border-color: yellow;
-    padding: 3% 2%;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 11px;
+  border:solid;
+  border-color: yellow;
+  padding: 3% 2%;
+  text-align: center;
+  display: inline-block;
+  font-size: 11px;
+  background-color: black;
+  color: yellow;
+  border-radius: 45%;
+
+}
+.scoreList {
+  text-align: center;
+}
+#everything {
+  background-image: url('/pics/bee1.jpg');
+  background-repeat: round;
+  background-attachment: fixed;
+  background-size: cover;
+  opacity: .7;
+}
+#navbarTimer {  
+  text-align: center;
+  z-index: 2;
+  border-color:black;
+  border-radius: 0% 0% 1% 0%;
+  border-style: dashed;
+  border-width: 2px;
+  background-color: black;
+  opacity: .7;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  color: white;
+  border-radius: 75%;
+}
+  .frindgeColor {
+    padding: 4px;
+   
+
+  }
+  .startBtn {
     background-color: black;
-    color: yellow;
-    border-radius: 45%;
-
-  }
-  .startQuizBtn {
-    border-color: black;
-    padding: 3% 2%;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 11px;
-    background-color: yellow;
-    color: black;
-    border-radius: 45%;
-  }
-  .countdown {
-      border: yellow;
-      border-style: solid;
-      background-color: black;
-      border-radius: 45%;
-      color: yellow;
-      margin-left: 25%;
-      margin-right: 25%;
-
-  }
-
-  .btn {
-    border-color: black;
-    padding: 3% 2%;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 11px;
-    background-color: yellow;
-    color: black;
-    border-radius: 45%;
+    opacity: .7;
+    color: white;
+    border-radius: 40;
   }
   
