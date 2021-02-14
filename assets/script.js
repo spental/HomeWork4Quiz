@@ -1,142 +1,218 @@
-const startTimer = document.querySelector(".countdown");
-let secondsLeft = 60;
-const startButton = document.querySelector("#start-btn");
-const questionContainerEl = document.querySelector("#question-container");
-const questionEl = document.querySelector("#question");
-const startButtonContainer = document.querySelector(".startBtn");
-var highscoreButton = document.querySelector(".scoreList");
-let currentQuestionIndex = 0;
-var timerInterval;
+//Variables = qNumber(null), timer(num), score(num), initials(text)
+let timer = 90;
+let runningTimer;
+let score = 0;
+let username = "";
+let qNumber;
+let finalScore;
+const MAX_HIGH_SCORES = 7;
+
+//DOM Objects = START BUTTON, ANSWER BUTTONS, QUESTION CONTAINER, QUESTION ELEMENT
+const startButton = document.getElementById("startButton");
+const qContainer = document.getElementById("questionsContainer");
+const qElement = document.getElementById("question");
+const answerButtons = document.getElementById("answers");
+const countdown = document.getElementById("timerArea");
+const scoreArea = document.getElementById("scoreArea");
+const highScoresButton = document.getElementById("showScoresButton");
+
+//LocalStorage Objects
+let highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+//
 
 startButton.addEventListener("click", startGame);
-//function to get the game started
+highScoresButton.addEventListener("click", displayScores);
+
+//function to start the game
+//called when start button is clicked, should run the function to display questions and the function to start the timer
+
 function startGame() {
   startButton.classList.add("hide");
-  questionContainerEl.classList.remove("hide");
-  startButtonContainer.classList.add("hide");
+  scoreArea.classList.add("hide");
+  answerButtons.classList.remove("hide");
+  qNumber = 0;
+  qContainer.classList.remove("hide");
+  scoreArea.innerHTML = "";
+  startClock();
+  while (answerButtons.firstChild) {
+    answerButtons.removeChild(answerButtons.firstChild);
+  }
+  showQuestion(questions[qNumber]);
+}
 
-  setTime();
-  setQuestion(currentQuestionIndex);
-}
-//function to set the questions
-function setQuestion(question) {
-  if (currentQuestionIndex >= questionList.length) {
-    gameOver();
-    return;
-  }
-  var main = document.getElementById("main");
-  const currentQuestion = questionList[currentQuestionIndex].question;
-  const h1 = document.createElement("h1");
-  h1.innerHTML = currentQuestion;
-  main.append(h1);
-  var btnGrid = document.createElement("div");
-  btnGrid.setAttribute("class", "answerBtns");
-  btnGrid.setAttribute("id", "btn-grid");
-  main.append(btnGrid);
-  //for loop that runs throught the questions and answers
-  for (
-    let index = 0;
-    index < questionList[currentQuestionIndex].answers.length;
-    index++
-  ) {
-    let element = questionList[currentQuestionIndex].answers[index];
-    var btn = document.createElement("button");
-    btn.setAttribute("class", "btn options");
-    btn.setAttribute("data-answer", element);
-    btn.innerHTML = element;
-    btn.addEventListener("click", function (event) {
-      let currentQuestion = questionList[currentQuestionIndex].correctAnswer;
-      let currentAnswer = event.target.getAttribute("data-answer");
-      //conditional statement that determines if the userschoice was correct
-      if (currentAnswer === currentQuestion) {
-        main.innerHTML = "";
-        currentQuestionIndex++;
-        var div = document.createElement("div");
-        main.append(div);
-        div.innerHTML = "CORRECT";
-        setQuestion(currentQuestionIndex);
-      } else if (currentAnswer !== currentQuestion) {
-        main.innerHTML = "";
-        var div = document.createElement("div");
-        main.append(div);
-        div.innerHTML = "INCORRECT";
-        currentQuestionIndex++;
-        setQuestion(currentQuestionIndex);
-      }
-      //conditional statement that runs time off the clock if the users choice was incorrect
-      if (currentAnswer !== currentQuestion) {
-        secondsLeft = secondsLeft - 10;
-      }
-    });
-    btnGrid.appendChild(btn);
-  }
-}
-//function to end the game
-function gameOver() {
-  clearInterval(timerInterval);
-  var main = document.getElementById("main");
-  main.innerHTML = "";
-  var h1 = document.createElement("h1");
-  h1.innerHTML = "!!! END OF GAME !!! your score is " + secondsLeft;
-  main.append(h1);
-  var input = document.createElement("input");
-  main.append(input);
-  var button = document.createElement("button");
-  button.innerText = "SUBMIT";
-  main.append(button);
-  button.addEventListener("click", function (event) {
-    var highscoresStr = window.localStorage.getItem("highscores");
-    var highscores = [];
-    //conditional statement to store the user score and intials in local storage
-    if (highscoresStr && highscoresStr !== "undefined") {
-      highscores = JSON.parse(highscoresStr);
+//function to display the questions
+//should load one object from the questions array into the proper html elements, then run the function to collect answers
+function showQuestion(question) {
+  qElement.innerText = question.question;
+  question.answers.forEach(answer => {
+    const button = document.createElement("button");
+    button.innerText = answer.text;
+    button.classList.add("btn");
+    if (answer.correct) {
+      button.dataset.correct = answer.correct;
     }
-    var score = { initials: input.value, score: secondsLeft };
-    highscores.push(score);
-    window.localStorage.setItem("highscores", JSON.stringify(highscores));
-    window.location.href = "/listOfHighScores.html";
+    button.addEventListener("click", selectAnswer);
+    answerButtons.appendChild(button);
   });
 }
-//function that gets the timer going once the game has been started
-function setTime() {
-  timerInterval = setInterval(function () {
-    secondsLeft--;
-    startTimer.textContent = secondsLeft;
-    if (secondsLeft <= 0) {
-      clearInterval(timerInterval);
-    }
-  }, 1000);
-}
-//redirect to highscore page
-highscoreButton.addEventListener("click", function () {
-  location.href = "/listOfHighScores.html";
-});
-//question object
-const questionList = [
-  {
-    question: "How far will an adult honeybee fly to find a food source??",
-    answers: ["1 mile", "100 yards", "30 feet", "4 Miles"],
-    correctAnswer: "4 Miles",
-  },
-  {
-    question: "How far will an adult honeybee fly to find a food source??",
-    answers: ["1 mile", "100 yards", "30 feet", "4 Miles"],
-    correctAnswer: "4 Miles",
-  },
-  {
-    question: "How far will an adult honeybee fly to find a food source??",
-    answers: ["1 mile", "100 yards", "30 feet", "4 Miles"],
-    correctAnswer: "4 Miles",
-  },
-  {
-    question: "How far will an adult honeybee fly to find a food source??",
-    answers: ["1 mile", "100 yards", "30 feet", "4 Miles"],
-    correctAnswer: "4 Miles",
-  },
-  {
-    question: "How far will an adult honeybee fly to find a food source??",
-    answers: ["1 mile", "100 yards", "30 feet", "4 Miles"],
-    correctAnswer: "4 Miles",
-  },
 
+//function to start the timer
+//should run a countdown that is displayed in the HTML, when time is up, should run the game over function
+function startClock() {
+  countdown.innerHTML = "Time Remaining: " + timer;
+  if (timer <= 0) {
+    gameOver();
+  } else {
+    timer -= 1;
+    runningTimer = setTimeout(startClock, 1000);
+  }
+}
+
+//function to collect answers
+//should listen for what answer the user clicks on, compare it to the correct answer, and decrease the timer if wrong. should then run the next question function
+//unless the current question is the last, then it should run the game over function
+function selectAnswer(e) {
+  const selectedButton = e.target;
+  if (!selectedButton.dataset.correct) {
+    timer = timer - 10;
+    console.log(timer);
+  }
+  if (qNumber == questions.length - 1) {
+    gameOver();
+  } else {
+    clearQuestion();
+    qNumber++;
+    showQuestion(questions[qNumber]);
+    console.log(score);
+  }
+}
+
+//function to clear the current question
+//should empty the HTML elements that are occupied with the currently displayed question
+function clearQuestion() {
+  while (answerButtons.firstChild) {
+    answerButtons.removeChild(answerButtons.firstChild);
+  }
+}
+
+//function for game over
+//should grab the current time remaining and set it as the score, hide the questions area, display the score to the user, and give them the chance to try again or submit
+//their high scores via a text box for intials and the high scores function
+function gameOver() {
+  clearInterval(runningTimer);
+  countdown.innerHTML = "Finished";
+  clearQuestion();
+  showResults();
+  startButton.innerText = "Restart";
+  startButton.classList.remove("hide");
+  timer = 90;
+  score = 0;
+}
+
+function showResults() {
+  finalScore = timer;
+  if (finalScore < 0) {
+    finalScore = 0;
+  }
+  qElement.innerText = "";
+  scoreArea.classList.remove("hide");
+  answerButtons.classList.add("hide");
+  scoreArea.innerHTML = `Your score is ${finalScore}!<div id="init">Name: <input type="text" name="initials" id="initials" placeholder="Enter Your Name"><button id="save-btn" class="save-btn btn" onclick="submitScores(event)" disabled>Save</button>`;
+  username = document.getElementById("initials");
+  saveButton = document.getElementById("save-btn");
+  username.addEventListener("keyup", function() {
+    saveButton.disabled = !username.value;
+  });
+}
+
+//function to submit high scores
+//should grab the users score and initials and add it to the high scores object, ranked numerically, and run the function to display the high scores
+function submitScores(e) {
+  const score = {
+    score: finalScore,
+    name: username.value
+  };
+  highScores.push(score);
+  highScores.sort((a, b) => b.score - a.score);
+  highScores.splice(MAX_HIGH_SCORES);
+
+  localStorage.setItem("highScores", JSON.stringify(highScores));
+  displayScores();
+}
+
+//function to display high scores
+//should populate the HTML with a ranked display of the high scores and and provide the option to clear the scores via a function
+function displayScores() {
+  clearInterval(runningTimer);
+  countdown.innerHTML = "";
+  clearQuestion();
+  qElement.innerText = "";
+  scoreArea.classList.remove("hide");
+
+  scoreArea.innerHTML = `<h2>High Scores</h2><ul id="highScoresList"></ul><button id="clearScores" class="btn" onclick="clearScores()">Clear Scores</button>`;
+  const highScoresList = document.getElementById("highScoresList");
+  highScoresList.innerHTML = highScores
+    .map(score => {
+      return `<li class="scoresList">${score.name} - ${score.score}</li>`;
+    })
+    .join("");
+  startButton.classList.remove("hide");
+  highScoresButton.classList.add("hide");
+}
+
+//function to clear high scores
+//should fire on click, and erase the values of the high scores object
+function clearScores() {
+  highScores = [];
+  highScoresList.innerHTML = "<h3>Scores have been Cleared</h3>";
+  document.getElementById("clearScores").classList.add("hide");
+}
+
+/////
+//Questions go Here
+/////
+const questions = [
+  {
+    question: "How many eyes does a Bee have?",
+    answers: [
+      { text: "3", correct: false },
+      { text: "5", correct: true },
+      { text: "10", correct: false },
+      { text: "12", correct: false }
+    ]
+  },
+  {
+    question: "How many honey bees would you find in a typical healthy colony during the active summer season?",
+    answers: [
+      { text: "All the bellow", correct: false },
+      { text: "Exactly 50,000 honey bees", correct: false },
+      { text: "Less than 50,000 honey bees", correct: false },
+      { text: "More than 50,000 honey bees", correct: true }
+    ]
+  },
+  {
+    question: "How many pairs of wings does a bee have?",
+    answers: [
+      { text: "4", correct: false },
+      { text: "2", correct: true }
+    ]
+  },
+  {
+    question: 'What are the members of the honey bee colony?',
+    answers: [
+      { text: 'Drone', correct: false },
+      { text: 'Queen', correct: false },
+      { text: 'Worker', correct: false },
+      { text: 'All the above', correct: true }
+    ]
+  },
+  {
+    question: "For how long can a queen honey bee live (assuming she is not killed by predators, and does not catch diseases).",
+    answers: [
+      { text: "3-4 years", correct: true },
+      { text: "1-2 years", correct: false },
+      { text: "7-8 years", correct: false },
+      { text: "5-6 years", correct: false }
+    ]
+  },
 ];

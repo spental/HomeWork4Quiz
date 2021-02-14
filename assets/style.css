@@ -1,70 +1,149 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: Gotham Rounded;
+  margin: 0;
+  padding: 0;
+}
+
 body {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  /* background-image: url("../pics/bee1.jpg");} */
   background-color: black;
 }
-#everything {
-  margin: 2%;
-  border-width: 2px;
-  border-color: yellow;
-  border-style: solid;
-
+h3 {
+  margin: 10px 0px;
 }
-#start-btn  {
-  border:solid;
-  border-color: yellow;
-  padding: 3% 2%;
-  text-align: center;
-  display: inline-block;
-  font-size: 11px;
-  background-color: black;
-  color: yellow;
-  border-radius: 45%;
-}
-.highScoreBtn {
-  border:solid;
-  border-color: yellow;
-  padding: 3% 2%;
-  text-align: center;
-  display: inline-block;
-  font-size: 11px;
-  background-color: black;
-  color: yellow;
-  border-radius: 45%;
-
-}
-.scoreList {
-  text-align: center;
-}
-#everything {
-  background-image: url('/pics/bee1.jpg');
-  background-repeat: round;
-  background-attachment: fixed;
-  background-size: cover;
-  opacity: .7;
-}
-#navbarTimer {  
-  text-align: center;
-  z-index: 2;
-  border-color:black;
-  border-radius: 0% 0% 1% 0%;
-  border-style: dashed;
-  border-width: 2px;
-  background-color: black;
-  opacity: .7;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  color: white;
-  border-radius: 75%;
-}
-  .frindgeColor {
-    padding: 4px;
-   
-
-  }
-  .startBtn {
-    background-color: black;
-    opacity: .7;
-    color: white;
-    border-radius: 40;
-  }
+h1 {
   
+    background-color: black;
+  opacity: 1;
+  color: yellow;
+  border-width: 10px;
+  border-color: black;
+  border-radius: 85%;
+  
+}
+
+.mainHeader {
+  padding-bottom: 0.3rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid grey;
+ 
+}
+#question {
+    background-color:black;
+    opacity: .9;
+    color: yellow;
+    border-style: dashed;
+
+}
+#timerArea {
+    background-color:black;
+    opacity: 1;
+    color: red;
+    border-width: 5px;
+}
+.quizArea {
+  width: 60vw;
+  max-width: 90%;
+  background-image: url("../pics/bee3.jpeg"); 
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 0 10px 2px;
+  background-color: black;
+  opacity: .7;
+  outline-color: black;
+  outline-style: dashed;
+}
+
+.buttonArea {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 10px;
+  margin: 20px 0;
+}
+
+button {
+  --hue: var(--hue-neutral);
+  border: 1px solid grey;
+  background-color: #0e2939;
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: yellow;
+  outline-color: black;
+  outline-style: dashed;
+}
+
+button:hover {
+  border-color: black;
+}
+
+.start {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 10px 20px;
+  margin: 10px 0px;
+}
+
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.hide {
+  display: none;
+}
+
+.scoresList {
+  text-decoration: none;
+  list-style-type: none;
+  margin: 0.3rem 0;
+}
+
+#highScoresList {
+  margin: 1rem 0;
+}
+
+#scoreArea {
+    padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid grey;
+  background-color: black;
+  opacity: 1;
+  color: yellow;
+}
+
+#init {
+  margin-top: 0.7rem;
+}
+#initials {
+  margin: 0.3rem;
+}
+
+#save-btn {
+  margin: 0.7rem;
+}
+
+#showScoresButton {
+  margin-top: 0.3rem;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .buttonArea {
+    display: grid;
+    grid-template-columns: none;
+    gap: 10px;
+    margin: 20px 0;
+  }
+}

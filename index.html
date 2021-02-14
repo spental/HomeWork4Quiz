@@ -3,45 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Heck of a Honeybee Quiz</title>
-    <link href="/assets/style.css" rel="stylesheet" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Honeybee Quiz</title>
+    <link rel="stylesheet" href="assets/style.css" />
   </head>
-
   <body>
-    <main id="everything">
-      <div class="frindgeColor">
-        <nav id="navbarTimer">
-          <h1>
-            <section class="countdown">Time Remaining : 60 seconds.</section>
-          </h1>
-        </nav>
-        
-        <section class="container" id="main">
-          <section id="question-container" class="hide">
-            <section id="question">
-              <section id="currentQuestion"></section>
-              <section class="answerBtns" id="btn-grid"></section>
-            </section>
-          </section>
-          <section class="startBtn" style="text-align: center;" id="question-container">
-              <h2>
-                Honeybee Quiz !
-              <hr />
-            </h2>
-            Click the [ Click Here to Start Quiz ] button below to begin the quiz. Once button is pressed a countdown timer will start. For every incorrect answer time will be deducted from the clock. Quiz will end when questions have all been answered or when the timer reaches 0 seconds remaining. 
-          </section>
+    <div >
+      <main class="quizArea">
+        <header class="mainHeader">
+          <h1>The Fantastic Honeybee Quiz</h1>
+          <span id="timerArea"></span>
+        </header>
+        <section id="questionsContainer" class="hide">
+          <div id="question"></div>
+          <div id="answers" class="buttonArea"></div>
         </section>
-        <div id="buttonStart" style="align-content: center; align-items: center; text-align: center;">
-          <button id="start-btn" class="start-btn btn">Start</button>
-        </div>
-  
-        
-        <footer>
-          <section class="scoreList">
-            <button class="highScoreBtn">Highscores</button>
-        </footer>
-      </div>
-    </main>
-    <script src="/assets/script.js"></script>
+        <section class="scores">
+          <div id="scoreArea" class="hide"></div>
+        </section>
+        <section class="controls">
+          <button class="start" id="startButton">CLICK HERE TO START</button>
+          <button class="btn" id="showScoresButton">Click Here to See High Scores</button>
+          <br />
+          <div id="scoreArea" class="hide">
+            <span id="scoreDisplay"></span>
+            <input type="text" name="initials" id="initials" />
+            <button id="submitScore" class="submit">Submit Your Score</button>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="assets/script.js"></script>
   </body>
 </html>
